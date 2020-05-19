@@ -6,6 +6,8 @@ import L from 'leaflet';
 import Layout from 'components/Layout';
 import Container from 'components/Container';
 import Map from 'components/Map';
+import TotalInfo from '../components/main/TotalInfo';
+import CountryInfo from '../components/main/CountryInfo';
 
 const LOCATION = {
   lat: 0,
@@ -126,13 +128,17 @@ const IndexPage = () => {
       <Map {...mapSettings}>
       </Map>
 
-      <Container type="content" className="text-center home-start">
-        <h2>Still Getting Started?</h2>
-        <p>Run the following in your terminal!</p>
-        <pre>
-          <code>gatsby new [directory] https://github.com/colbyfayock/gatsby-starter-leaflet</code>
-        </pre>
-        <p className="note">Note: Gatsby CLI required globally for the above command</p>
+      <Container type="content" className="total-info">
+        <TotalInfo></TotalInfo>
+      </Container>
+      <Container type="content" className="total-deaths">
+        <TotalInfo></TotalInfo>
+      </Container>
+      <Container type="content" className="total-recovered">
+        <TotalInfo></TotalInfo>
+      </Container>
+      <Container type="content" className="country-info">
+        <CountryInfo></CountryInfo>
       </Container>
     </Layout>
   );

@@ -2,11 +2,40 @@
 
   .map,
   .map-base {
-    height: 50vh;
+    // height: 50vh;
+    height: 100%;
   }
 
   main {
     padding: 0;
+    display: grid;
+    grid-template-areas:    "total-info map total-deaths"
+                            "total-info map total-deaths"
+                            "total-info map total-recovered"
+                            "total-info country-info total-recovered";
+    grid-template-rows: repeat(4,1fr);
+    grid-template-columns: 1fr 4fr 1fr;
+  }
+
+  .total-info{
+    background-color: salmon;
+    grid-area: total-info;
+  }
+  .country-info{
+    background-color: royalblue;
+    grid-area: country-info;
+    max-width: 100%;
+  }
+  .total-deaths{
+    background-color: red;
+    grid-area: total-deaths;
+  }
+  .total-recovered {
+    grid-area: total-recovered;
+    background-color: green;
+  }
+  .map{
+    grid-area: map;
   }
 
   .popup-gatsby {
