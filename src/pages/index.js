@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import L from 'leaflet';
@@ -16,15 +16,34 @@ const LOCATION = {
 const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
 
+let markers = null;
+
 const IndexPage = () => {
 
+  const [totalCases,setTotalCases] = useState({caption:{text:'Total Cases',value:''},data:[]});
+  const [totalDeaths,setTotalDeaths] = useState({caption:{text:'Total Deaths',value:''},data:[]});
+  const [totalRecovered,setTotalRecovered] = useState({caption:{text:'Total Recovered',value:''},data:[]});
+  const [countryInformation,setCountryInformation] = useState({});
+
+  useEffect(()=>{
+    console.log('USe effect');  
+    axios.get('https://corona.lmao.ninja/v2/all')
+    .then(totalData=>{
+      axios.get('https://corona.lmao.ninja/v2/countries')
+      .then(countryData=>{
+        const dataTest = getTotalCasesData(countryData.data);
+        console.log(totalData);
+        setTotalCases({caption:{text:'Total Cases',value:totalData.data.cases},data:getTotalCasesData(countryData.data)});
+      })
+    })
+  },[]);
   /**
    * mapEffect
    * @description Fires a callback once the page renders
-   * @example Here this is and example of being used to zoom in and set a popup on load
    */
-
   async function mapEffect({ leafletElement: map } = {}) {
+    console.log('Map effect');  
+    clearLayers(map);
     let response;
     try {
       response = await axios.get('https://corona.lmao.ninja/v2/countries');
@@ -32,10 +51,17 @@ const IndexPage = () => {
       console.log(`Fetching data error: ${e.message}`);
       return;
     }
-    const { data = [] } = response;
+    const { data = [] } = response;    
     const geoJSON = getGeoJSON(data);
     const geoJsonLayers = getLeafletGeoJSON(geoJSON);
+    markers = geoJsonLayers;
     geoJsonLayers.addTo(map);
+  }
+
+  const clearLayers = (map) => {
+    if(markers){
+      map.removeLayer(markers);
+    }
   }
 
   const getLeafletGeoJSON = geoJSON => {
@@ -112,6 +138,17 @@ const IndexPage = () => {
     } else return {};
   }
 
+  const getTotalCasesData = data => {
+    if(Array.isArray(data)&&data.length>0){
+      return data.map(element=>{
+        return {
+          text: element.country,
+          value: element.cases
+        }
+      })
+    } else return [];
+  }
+
   const mapSettings = {
     center: CENTER,
     defaultBaseMap: 'OpenStreetMap',
@@ -129,7 +166,7 @@ const IndexPage = () => {
       </Map>
 
       <Container type="content" className="total-info">
-        <TotalInfo></TotalInfo>
+        <TotalInfo data={totalCases}></TotalInfo>
       </Container>
       <Container type="content" className="total-deaths">
         <TotalInfo></TotalInfo>
