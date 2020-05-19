@@ -23,14 +23,14 @@ const IndexPage = () => {
    */
 
   async function mapEffect({ leafletElement: map } = {}) {
-    let data = [];
-    await axios.get('https://corona.lmao.ninja/v2/countries')
-    .then(response => {
-      data = response.data;
-    })
-    .catch(error=>{
-      console.log(`fetching data error: ${error.message}`);
-    });
+    let response;
+    try {
+      response = await axios.get('https://corona.lmao.ninja/v2/countries');
+    } catch(e) {
+      console.log(`Fetching data error: ${e.message}`);
+      return;
+    }
+    const { data = [] } = response;
   }
 
   const mapSettings = {
