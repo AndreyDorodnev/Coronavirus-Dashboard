@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
-import L from 'leaflet';
+import L, { latLng } from 'leaflet';
 
 import Layout from 'components/Layout';
 import Container from 'components/Container';
@@ -31,9 +31,64 @@ const IndexPage = () => {
       return;
     }
     const { data = [] } = response;
+    const geoJSON = getGeoJSON(data);
+    const geoJsonLayers = getLeafletGeoJSON(geoJSON);
+    geoJsonLayers.addTo(map);
+  }
+
+  const getLeafletGeoJSON = geoJSON => {
+    return new L.geoJSON(geoJSON,{
+      pointToLayer: (feature={},latLng) =>{
+        const { properties = {} } = feature;
+        let updatedFormatted;
+        let casesString;
+        const {
+          country,
+          updated,
+          cases,
+          deaths,
+          recovered
+        } = properties;
+        casesString = getShortNum(cases);
+        updatedFormatted = getdateFromMilliseconds(updated);
+
+        const html = `
+          <span class="icon-marker">
+            <span class="icon-marker-tooltip">
+              <h2>${country}</h2>
+              <ul>
+                <li><strong>Confirmed:</strong> ${cases}</li>
+                <li><strong>Deaths:</strong> ${deaths}</li>
+                <li><strong>Recovered:</strong> ${recovered}</li>
+                <li><strong>Last Update:</strong> ${updatedFormatted}</li>
+              </ul>
+            </span>
+            ${ casesString }
+          </span>
+        `;
+
+        return L.marker(latLng,{
+          icon: L.divIcon({
+            className: 'icon',
+            html
+          }),
+          riseOnHover: true
+        });
+
+      }
+    });
+  }
+
+  const getShortNum = num => {
+    return num>1000? `${String(num).slice(0,-3)}k` : `${num}`;
+  }
+
+  const getdateFromMilliseconds = milliseconds => {
+    return milliseconds>0? new Date(milliseconds).toLocaleString() : '';  
   }
 
   const getGeoJSON = (data) => {
+    //Specification:  https://geojson.org/
     if(Array.isArray(data)&&data.length>0){
       return {
         type: 'FeatureCollection',
