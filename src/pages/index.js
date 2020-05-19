@@ -33,6 +33,28 @@ const IndexPage = () => {
     const { data = [] } = response;
   }
 
+  const getGeoJSON = (data) => {
+    if(Array.isArray(data)&&data.length>0){
+      return {
+        type: 'FeatureCollection',
+        features: data.map(country=>{
+          const { countryInfo = {} } = country;
+          const { lat, long: lng } = countryInfo;
+          return {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [ lng, lat ]
+            },
+            properties: {
+              ...country
+            }
+          }
+        })
+      }
+    } else return {};
+  }
+
   const mapSettings = {
     center: CENTER,
     defaultBaseMap: 'OpenStreetMap',
