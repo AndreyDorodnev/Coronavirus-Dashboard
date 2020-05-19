@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import L from 'leaflet';
 
@@ -22,7 +23,14 @@ const IndexPage = () => {
    */
 
   async function mapEffect({ leafletElement: map } = {}) {
-
+    let data = [];
+    await axios.get('https://corona.lmao.ninja/v2/countries')
+    .then(response => {
+      data = response.data;
+    })
+    .catch(error=>{
+      console.log(`fetching data error: ${error.message}`);
+    });
   }
 
   const mapSettings = {
