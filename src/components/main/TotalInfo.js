@@ -2,33 +2,37 @@ import React from 'react';
 
 export default props => {
     return (
-        <div>
+        <React.Fragment>
             {
                 props.data?
                 (
-                    <div>
+                    <React.Fragment>
+                        {console.log('TOTAL',props)}
                         <div className="caption">
                             <p>{props.data.caption.text}</p>
                             <p>{props.data.caption.value}</p>
                         </div>
-                        <ul>
-                            {
-                                props.data.data.map(element=>{
-                                    return (
-                                        <li key={element.text}>
-                                            <div>{element.text}</div>
-                                            <div>{element.value}</div>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
+                        <div className="list">
+                            <ul>
+                                {
+                                    props.data.data.map(element=>{
+                                        return (
+                                            <li key={element.text}>
+                                                <div>{element.text}</div>
+                                                <div>{element.value}</div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+
+                    </React.Fragment>
                 ):
                 (
                     null
                 )
             }
-        </div>
+        </React.Fragment>
     )
 }

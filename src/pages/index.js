@@ -20,24 +20,19 @@ let markers = null;
 
 const IndexPage = () => {
 
-  const [totalCases,setTotalCases] = useState({caption:{text:'Total Cases',value:''},data:[]});
-  const [totalDeaths,setTotalDeaths] = useState({caption:{text:'Total Deaths',value:''},data:[]});
-  const [totalRecovered,setTotalRecovered] = useState({caption:{text:'Total Recovered',value:''},data:[]});
-  const [countryInformation,setCountryInformation] = useState({});
-  const [totalData,setTotalData] = useState({});
+  const [totalData,setTotalData] = useState(null);
 
-  // useEffect(()=>{
-  //   console.log('USe effect');  
-  //   axios.get('https://corona.lmao.ninja/v2/all')
-  //   .then(totalData=>{
-  //     axios.get('https://corona.lmao.ninja/v2/countries')
-  //     .then(countryData=>{
-  //       const dataTest = getTotalCasesData(countryData.data);
-  //       console.log(totalData);
-  //       setTotalCases({caption:{text:'Total Cases',value:totalData.data.cases},data:getTotalCasesData(countryData.data)});
-  //     })
-  //   })
-  // },[]);
+  useEffect(()=>{
+    console.log('USe effect');  
+    axios.get('https://corona.lmao.ninja/v2/all')
+    .then(totalData=>{
+      axios.get('https://corona.lmao.ninja/v2/countries')
+      .then(countryData=>{
+        setTotalData({total:totalData.data,countryData:countryData.data});
+        // console.log(getTotalCasesData({total:totalData.data,countryData:countryData.data}));
+      })
+    })
+  },[]);
   /**
    * mapEffect
    * @description Fires a callback once the page renders
@@ -140,24 +135,52 @@ const IndexPage = () => {
   }
 
   const getTotalCasesData = data => {
-    if(Array.isArray(data)&&data.length>0){
-      return data.map(element=>{
-        return {
-          text: element.country,
-          value: element.cases
-        }
-      })
-    } else return [];
+    if(data){
+      return {
+        caption: {
+          text: 'Total Cases',
+          value: data.total.cases
+        },
+        data: data.countryData.map(element=>{
+          return {
+            text: element.country,
+            value: element.cases
+          }
+        })
+      }
+    } else return null;
   }
-
-  const getTotalDataInfo = data => {
-    if(Array.isArray(data)&&data.length>0){
-      return data.map(element=>{
-        return {
-          
-        }
-      })
-    }else return null
+  const getTotalDeathsData = data => {
+    if(data){
+      return {
+        caption: {
+          text: 'Total Deaths',
+          value: data.total.deaths
+        },
+        data: data.countryData.map(element=>{
+          return {
+            text: element.country,
+            value: element.deaths
+          }
+        })
+      }
+    } else return null;
+  }
+  const getTotalRecoveredData = data => {
+    if(data){
+      return {
+        caption: {
+          text: 'Total Recovered',
+          value: data.total.recovered
+        },
+        data: data.countryData.map(element=>{
+          return {
+            text: element.country,
+            value: element.recovered
+          }
+        })
+      }
+    } else return null;
   }
 
   const mapSettings = {
@@ -177,13 +200,13 @@ const IndexPage = () => {
       </Map>
 
       <Container type="content" className="total-info">
-        <TotalInfo data={totalCases}></TotalInfo>
+        <TotalInfo data={getTotalCasesData(totalData)}></TotalInfo>
       </Container>
       <Container type="content" className="total-deaths">
-        <TotalInfo></TotalInfo>
+        <TotalInfo data={getTotalDeathsData(totalData)}></TotalInfo>
       </Container>
       <Container type="content" className="total-recovered">
-        <TotalInfo></TotalInfo>
+        <TotalInfo data={getTotalRecoveredData(totalData)}></TotalInfo>
       </Container>
       <Container type="content" className="country-info">
         <CountryInfo></CountryInfo>
