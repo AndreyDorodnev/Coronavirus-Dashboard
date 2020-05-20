@@ -26,34 +26,31 @@ const IndexPage = () => {
 
   useEffect(()=>{
     console.log('USe effect');  
+    updateData();
+  },[]);
+
+  const updateData = () => {
     axios.get('https://corona.lmao.ninja/v2/all')
     .then(totalData=>{
       axios.get('https://corona.lmao.ninja/v2/countries')
       .then(countryData=>{
         setTotalData({total:totalData.data,countryData:countryData.data});
         // console.log(getTotalCasesData({total:totalData.data,countryData:countryData.data}));
-      })
-    })
-  },[]);
+      });
+    });
+  }
   /**
    * mapEffect
    * @description Fires a callback once the page renders
    */
   async function mapEffect({ leafletElement: map } = {}) {
+    //save current map
     currentMap = map;
     console.log('Map effect');  
-    clearLayers(map);
+    clearLayers(markers,map);
     if(!totalData)
       return;
     const data = totalData.countryData;
-    // let response;
-    // try {
-    //   response = await axios.get('https://corona.lmao.ninja/v2/countries');
-    // } catch(e) {
-    //   console.log(`Fetching data error: ${e.message}`);
-    //   return;
-    // }
-    // const { data = [] } = response;    
     const geoJSON = getGeoJSON(data);
     const geoJsonLayers = getLeafletGeoJSON(geoJSON);
     //save current markers 
@@ -61,7 +58,8 @@ const IndexPage = () => {
     geoJsonLayers.addTo(map);
   }
 
-  const clearLayers = (map) => {
+  const clearLayers = (markers,map) => {
+    //clear markers from map
     if(markers){
       map.removeLayer(markers);
     }
@@ -231,7 +229,7 @@ const IndexPage = () => {
         <TotalInfo data={getTotalRecoveredData(totalData)}></TotalInfo>
       </Container>
       <Container type="content" className="country-info">
-        <CountryInfo></CountryInfo>
+        <CountryInfo data={currentCountry}></CountryInfo>
       </Container>
     </Layout>
   );
