@@ -17,10 +17,12 @@ const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
 
 let markers = null;
+let currentMap = null;
 
 const IndexPage = () => {
 
   const [totalData,setTotalData] = useState(null);
+  const [currentCountry,setCurrentCountry] = useState(null);
 
   useEffect(()=>{
     console.log('USe effect');  
@@ -38,18 +40,23 @@ const IndexPage = () => {
    * @description Fires a callback once the page renders
    */
   async function mapEffect({ leafletElement: map } = {}) {
+    currentMap = map;
     console.log('Map effect');  
     clearLayers(map);
-    let response;
-    try {
-      response = await axios.get('https://corona.lmao.ninja/v2/countries');
-    } catch(e) {
-      console.log(`Fetching data error: ${e.message}`);
+    if(!totalData)
       return;
-    }
-    const { data = [] } = response;    
+    const data = totalData.countryData;
+    // let response;
+    // try {
+    //   response = await axios.get('https://corona.lmao.ninja/v2/countries');
+    // } catch(e) {
+    //   console.log(`Fetching data error: ${e.message}`);
+    //   return;
+    // }
+    // const { data = [] } = response;    
     const geoJSON = getGeoJSON(data);
     const geoJsonLayers = getLeafletGeoJSON(geoJSON);
+    //save current markers 
     markers = geoJsonLayers;
     geoJsonLayers.addTo(map);
   }
@@ -134,6 +141,21 @@ const IndexPage = () => {
     } else return {};
   }
 
+  const setCountry = country => {
+    const countryInfo = getCountryInfo(country,totalData);
+    const {long,lat} = countryInfo.countryInfo;
+    currentMap.flyTo([lat,long],8);
+    setCurrentCountry(country);
+  }
+
+  const getCountryInfo = (country,data) => {
+    if(data&&country){
+      return data.countryData.find(element=>{
+        return element.country === country;
+      })
+    }
+  }
+
   const getTotalCasesData = data => {
     if(data){
       return {
@@ -200,7 +222,7 @@ const IndexPage = () => {
       </Map>
 
       <Container type="content" className="total-info">
-        <TotalInfo data={getTotalCasesData(totalData)}></TotalInfo>
+        <TotalInfo data={getTotalCasesData(totalData)} itemClick={setCountry}></TotalInfo>
       </Container>
       <Container type="content" className="total-deaths">
         <TotalInfo data={getTotalDeathsData(totalData)}></TotalInfo>
