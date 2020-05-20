@@ -7,7 +7,6 @@ export default props => {
                 props.data?
                 (
                     <React.Fragment>
-                        {console.log('TOTAL',props)}
                         <div className="caption">
                             <p>{props.data.caption.text}</p>
                             <p>{props.data.caption.value}</p>
@@ -17,7 +16,7 @@ export default props => {
                                 {
                                     props.data.data.map(element=>{
                                         return (
-                                            <li key={element.text}>
+                                            <li key={element.text} onClick={evt=>props.itemClick(element.text)}>
                                                 <div>{element.text}</div>
                                                 <div>{element.value}</div>
                                             </li>
