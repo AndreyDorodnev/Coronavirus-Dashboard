@@ -41,6 +41,8 @@ const Map = ( props ) => {
   const mapSettings = {
     className: 'map-base',
     zoomControl: false,
+    maxZoom: 12,
+    minZoom: 2,
     ...rest,
   };
 
