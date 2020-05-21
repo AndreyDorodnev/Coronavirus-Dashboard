@@ -5,11 +5,14 @@ header {
   background-color: $gatsby-purple;
 
   .container {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     height: 2.5em;
     line-height: 2.5em;
   }
+
+
 
   ul {
     list-style: none;

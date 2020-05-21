@@ -15,6 +15,10 @@ html{
   --primary-surface-selected: #0277BD ;
 }
 
+html[data-theme="dark"]{
+  --primary-background: #000;
+}
+
 body {
   font-family: $font-default;
   padding: 0;

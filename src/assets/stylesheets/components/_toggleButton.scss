@@ -1,0 +1,36 @@
+.toggleButton{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .border{
+        transition: 0.3s;
+        cursor: pointer;
+        position: relative;
+        width: 36px;
+        height: 16px;
+        border: 1px solid lightgray;
+        background-color: white;
+        border-radius: 10px;
+        margin-right: 10px;
+        .button{
+            transition: 0.3s;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: red;
+            border-radius: 50%;
+            left: 0px;
+            top: -1px;
+        }
+        .active{
+            transition: 0.3s;
+            left: 100%;
+            transform: translateX(-100%);
+            background-color: darkcyan;
+        }
+    }
+    span{
+        cursor: default;
+        color: var(--secondaryFontColor);
+    }
+}
