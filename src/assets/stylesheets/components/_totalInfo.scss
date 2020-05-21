@@ -42,7 +42,9 @@
           padding: 4px 4px;
           height: min-content;
           width: 100%;
-          border: 1px solid lightgrey;
+          border: 0;
+          border-bottom: 1px solid lightgrey;
+          border-top: 1px solid lightgrey;
           color: white;
           &:hover{
             background-color: var(--primary-surface-selected);
