@@ -18,7 +18,9 @@ export default props => {
                         </div>
                     ):
                     (
-                        <p>No country selected</p>
+                        <div className="info">
+                            <p>No country selected</p>
+                        </div>
                     )
                 }
 
