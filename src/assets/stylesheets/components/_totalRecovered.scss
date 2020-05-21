@@ -9,7 +9,7 @@
         flex-direction: column;
         .caption{
           margin-top: 16px;
-          background-color: cornflowerblue;
+          background-color: var(--primary-surface);
           text-align: center;
           text-transform: uppercase;
           color: white;
@@ -28,7 +28,7 @@
             max-height: 100%;
             overflow: hidden;
             overflow-y: scroll;
-            background-color: cornflowerblue;
+            background-color: var(--primary-surface);
             list-style: none;
             padding: 0;
             li{
@@ -39,7 +39,7 @@
               border: 1px solid lightgrey;
               color: white;
               &:hover{
-                background-color: dodgerblue;
+                background-color: var(--primary-surface-selected);
               }
             }
           }

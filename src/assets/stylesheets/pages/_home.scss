@@ -10,7 +10,7 @@
     grid-template-areas:    "total-info map total-deaths"
                             "total-info map total-deaths"
                             "total-info map total-recovered"
-                            "total-info country-info total-recovered";
+                            "country-info map total-recovered";
     grid-template-rows: repeat(4,1fr);
     grid-template-columns: 1fr 4fr 1fr;
     height: 100%;
