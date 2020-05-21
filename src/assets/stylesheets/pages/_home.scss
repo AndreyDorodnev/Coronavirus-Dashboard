@@ -9,10 +9,13 @@
     display: grid;
     grid-template-areas:    "total-info map total-deaths"
                             "total-info map total-deaths"
+                            "total-info map total-deaths"
                             "total-info map total-recovered"
-                            "country-info map total-recovered";
-    grid-template-rows: repeat(4,1fr);
-    grid-template-columns: 1fr 4fr 1fr;
+                            "country-info map total-recovered"
+                            "country-info map total-recovered"
+                            ;
+    grid-template-rows: repeat(6,1fr);
+    grid-template-columns: 2fr 7fr 2fr;
     height: 100%;
   }
 

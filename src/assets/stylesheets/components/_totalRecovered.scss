@@ -8,13 +8,18 @@
         display: flex;
         flex-direction: column;
         .caption{
-          margin-top: 16px;
           background-color: var(--primary-surface);
           text-align: center;
           text-transform: uppercase;
           color: white;
-          font-size: 20px;
           padding: 5px;
+          p{
+            margin: 6px 0;
+            font-size: 14px;
+            &:first-child{
+              font-size: 28px;
+            }
+          }
         }
         .list{
           position: relative;

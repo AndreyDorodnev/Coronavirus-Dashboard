@@ -7,7 +7,7 @@ export default props => {
                 {
                     props.data?
                     (
-                        <div>
+                        <div className="info">
                             <p className="header">{`Country: ${props.data.country}`}</p>
                             <p>{`Continent: ${props.data.continent}`}</p>
                             <p>{`Population: ${props.data.population}`}</p>

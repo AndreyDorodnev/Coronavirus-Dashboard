@@ -1,18 +1,37 @@
 .page-home{
     .country-info{
+      position: relative;
+      background-color: var(--primary-background);
+      grid-area: country-info;
+      max-width: 100%;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      // margin: 16px;
+      .information{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background-color: var(--primary-background);
-        grid-area: country-info;
-        max-width: 100%;
+        width: 100%;
         height: 100%;
-        padding-bottom: 16px;
-        .information{
+        box-sizing: border-box;
+        padding: 16px;
+        padding-top: 0;
+        .info{
+          padding-top: 10px;
+          position: relative;
           background-color: var(--primary-surface);
-          padding: 10px 0;
+          width: 100%;
           height: 100%;
           p{
             margin: 2px 4px;
             color: var(--primary-font-color);
           }
         }
+
       }
+    }
 }

@@ -8,8 +8,8 @@ export default props => {
                 (
                     <React.Fragment>
                         <div className="caption">
-                            <p>{props.data.caption.text}</p>
                             <p>{props.data.caption.value}</p>
+                            <p>{props.data.caption.text}</p>
                         </div>
                         <div className="list">
                             <ul>
