@@ -55,7 +55,7 @@ const IndexPage = () => {
     const geoJsonLayers = getLeafletGeoJSON(geoJSON);
     //save current markers 
     markers = geoJsonLayers;
-    geoJsonLayers.addTo(map);
+    geoJsonLayers.addTo(map).on('click',markerClick);
   }
 
   const clearLayers = (markers,map) => {
@@ -106,6 +106,11 @@ const IndexPage = () => {
 
       }
     });
+  }
+
+  const markerClick = (evt) => {
+    console.log('MARKER',evt);
+    
   }
 
   const getShortNum = num => {
