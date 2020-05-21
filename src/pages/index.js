@@ -143,7 +143,7 @@ const IndexPage = () => {
     const countryInfo = getCountryInfo(country,totalData);
     const {long,lat} = countryInfo.countryInfo;
     currentMap.flyTo([lat,long],8);
-    setCurrentCountry(country);
+    setCurrentCountry(countryInfo);
   }
 
   const getCountryInfo = (country,data) => {

@@ -2,8 +2,27 @@ import React from 'react';
 
 export default props => {
     return (
-        <div>
-            COUNTRY INFO
-        </div>
+        <React.Fragment>
+            <div className="information">
+                {
+                    props.data?
+                    (
+                        <div>
+                            <p className="header">{`Country: ${props.data.country}`}</p>
+                            <p>{`Continent: ${props.data.continent}`}</p>
+                            <p>{`Population: ${props.data.population}`}</p>
+                            <p>{`Tests: ${props.data.tests}`}</p>
+                            <p>{`Cases: ${props.data.cases}`}</p>
+                            <p>{`Deaths: ${props.data.deaths}`}</p>
+                            <p>{`Recovered: ${props.data.recovered}`}</p>
+                        </div>
+                    ):
+                    (
+                        <p>No country selected</p>
+                    )
+                }
+
+            </div>
+        </React.Fragment>
     )
 }
