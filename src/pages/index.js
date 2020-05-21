@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import L from 'leaflet';
-
+import _ from "lodash";
 import Layout from 'components/Layout';
 import Container from 'components/Container';
 import Map from 'components/Map';
@@ -161,12 +161,13 @@ const IndexPage = () => {
           text: 'Total Cases',
           value: data.total.cases
         },
-        data: data.countryData.map(element=>{
+        data: _.orderBy(data.countryData.map(element=>{
           return {
             text: element.country,
             value: element.cases
           }
-        })
+        }),['value'],['desc']
+        ) 
       }
     } else return null;
   }
@@ -177,12 +178,12 @@ const IndexPage = () => {
           text: 'Total Deaths',
           value: data.total.deaths
         },
-        data: data.countryData.map(element=>{
+        data: _.orderBy(data.countryData.map(element=>{
           return {
             text: element.country,
             value: element.deaths
           }
-        })
+        }),['value'],['desc'])
       }
     } else return null;
   }
@@ -193,12 +194,12 @@ const IndexPage = () => {
           text: 'Total Recovered',
           value: data.total.recovered
         },
-        data: data.countryData.map(element=>{
+        data: _.orderBy(data.countryData.map(element=>{
           return {
             text: element.country,
             value: element.recovered
           }
-        })
+        }),['value'],['desc'])
       }
     } else return null;
   }
