@@ -1,6 +1,21 @@
 import React from 'react';
 
 export default props => {
+
+    const getValueStr = value => {
+        const result = [];
+        let count =0;
+        String(value).split('').reverse().forEach((element,index)=>{
+            result.push(element);
+            if(++count===3){
+                result.push(' ');
+                count=0;
+            }
+
+        });
+        return result.reverse().join('');
+    }
+
     return (
         <React.Fragment>
             {
@@ -8,7 +23,7 @@ export default props => {
                 (
                     <React.Fragment>
                         <div className="caption">
-                            <p>{props.data.caption.value}</p>
+                            <p>{getValueStr(props.data.caption.value)}</p>
                             <p>{props.data.caption.text}</p>
                         </div>
                         <div className="list">
