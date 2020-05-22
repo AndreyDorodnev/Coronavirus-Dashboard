@@ -115,8 +115,10 @@ const IndexPage = () => {
   }
 
   const markerClick = (evt) => {
-    //todo set country info by name
-    console.log('MARKER',evt);
+    const countryInfo = getCountryInfoByLatLng(evt.latlng,totalData);
+    if(countryInfo){
+      setCurrentCountry(countryInfo);
+    }
   }
 
   const getShortNum = num => {
@@ -151,7 +153,7 @@ const IndexPage = () => {
   }
 
   const setCountry = country => {
-      const countryInfo = getCountryInfo(country,totalData);
+      const countryInfo = getCountryInfoByName(country,totalData);
       if(countryInfo){
         const {long,lat} = countryInfo.countryInfo;
         currentMap.flyTo([lat,long],8);
@@ -161,10 +163,17 @@ const IndexPage = () => {
     }
   }
 
-  const getCountryInfo = (country,data) => {
+  const getCountryInfoByName = (country,data) => {
     if(data&&country){
       return data.countryData.find(element=>{
         return element.country.toLowerCase() === country.toLowerCase();
+      })
+    }
+  }
+  const getCountryInfoByLatLng = (latLng,data) => {
+    if(data&&latLng){
+      return data.countryData.find(element=>{
+        return (element.countryInfo.lat === latLng.lat) && (element.countryInfo.long == latLng.lng) 
       })
     }
   }
