@@ -12,9 +12,35 @@ header {
     line-height: 2.5em;
   }
 
-  p{
-    margin: 0;
+  .caption{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p{
+      margin: 0;
+      margin-right: 20px;
+    }
+    .icon{
+      position: relative;
+      svg{
+        position: absolute;
+        top: 50%;
+        transform:translateY(-50%);
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        fill: var(--primary-font-color);
+        transition: 1s;
+        &:hover{
+          transform: translateY(-50%) rotate(180deg);
+        }
+      }
+    }
+
   }
+  // p{
+  //   margin: 0;
+  // }
 
   form{
     input{

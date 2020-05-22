@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import { Link } from 'gatsby';
 import ToggleButton from './ui/ToggleButton';
 import Container from 'components/Container';
+import {ReactComponent as RefreshIcon} from '../assets/icons/refresh.svg';
 
 const Header = () => {
 
@@ -44,18 +45,21 @@ const Header = () => {
   }
 
   const applyTheme = isDark => {
-    if(isDark){
-      document.documentElement.setAttribute('data-theme','dark')
-    } else {
-      document.documentElement.removeAttribute('data-theme')
-    }
-    // isDark? : ;
+    // if(isDark){
+    //   document.documentElement.setAttribute('data-theme','dark')
+    // } else {
+    //   document.documentElement.removeAttribute('data-theme')
+    // }
+    isDark? document.documentElement.setAttribute('data-theme','dark') : document.documentElement.removeAttribute('data-theme');
   }
 
   return (
     <header>
       <Container type="content">
-        <p>Coronavirus dashboard</p>
+        <div className="caption">
+          <p>Coronavirus dashboard</p>
+          <div className="icon" title="Refresh data"><RefreshIcon></RefreshIcon></div>
+        </div>
         <form>
           <input type="text" placeholder="enter country"></input>
         </form>

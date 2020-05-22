@@ -11,5 +11,12 @@ module.exports = {
       },
     },
     'gatsby-plugin-react-leaflet',
+    'gatsby-plugin-svgr',
+    // {
+    //   resolve: 'gatsby-plugin-svgr',
+    //   options: {
+    //     exclude: './src/icons/'
+    //   }
+    // },
   ],
 };
