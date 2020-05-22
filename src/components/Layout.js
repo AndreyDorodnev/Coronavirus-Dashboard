@@ -7,7 +7,7 @@ import 'assets/stylesheets/application.scss';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-const Layout = ({ children, pageName,refreshData,updated }) => {
+const Layout = ({ children, pageName,refreshData,updated,searchCountry }) => {
   let className = '';
 
   if ( pageName ) {
@@ -20,7 +20,7 @@ const Layout = ({ children, pageName,refreshData,updated }) => {
         <title>Gatsby Site</title>
       </Helmet>
       <div className="wrapper">
-        <Header refreshData={refreshData} updated={updated}/>
+        <Header refreshData={refreshData} updated={updated} searchEnter={searchCountry}/>
         <main>{ children }</main>
         <Footer />
       </div>

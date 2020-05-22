@@ -26,7 +26,6 @@ const IndexPage = () => {
   const [currentCountry,setCurrentCountry] = useState(null);
   const [message,setMessage] = useState({text:'',time:''});
 
-
   useEffect(()=>{
     console.log('USe effect');  
     updateData();
@@ -38,8 +37,7 @@ const IndexPage = () => {
       axios.get('https://corona.lmao.ninja/v2/countries')
       .then(countryData=>{
         setTotalData({total:summaryData.data,countryData:countryData.data});
-        setMessage({text:`Data has been refresh`,time: Date.now()});
-        // console.log(getTotalCasesData({total:totalData.data,countryData:countryData.data}));
+        showMessage('Data has been refresh');
       });
     });
   }
@@ -112,10 +110,13 @@ const IndexPage = () => {
     });
   }
 
+  const showMessage = (msg) => {
+    setMessage({text:msg,time:Date.now()});
+  }
+
   const markerClick = (evt) => {
     //todo set country info by name
     console.log('MARKER',evt);
-    // setMessage("Marker click");
   }
 
   const getShortNum = num => {
@@ -216,7 +217,6 @@ const IndexPage = () => {
 
   const getLastUpdate = () => {
     return totalData? getdateFromMilliseconds(totalData.total.updated): null;
-
   }
 
   const mapSettings = {
@@ -227,7 +227,7 @@ const IndexPage = () => {
   };
 
   return (
-    <Layout pageName="home" refreshData={updateData} updated={getLastUpdate()}>
+    <Layout pageName="home" refreshData={updateData} updated={getLastUpdate()} searchCountry={setCountry}>
       <Helmet>
         <title>Coronavirus map</title>
       </Helmet>
