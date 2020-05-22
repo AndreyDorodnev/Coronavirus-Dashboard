@@ -151,16 +151,20 @@ const IndexPage = () => {
   }
 
   const setCountry = country => {
-    const countryInfo = getCountryInfo(country,totalData);
-    const {long,lat} = countryInfo.countryInfo;
-    currentMap.flyTo([lat,long],8);
-    setCurrentCountry(countryInfo);
+      const countryInfo = getCountryInfo(country,totalData);
+      if(countryInfo){
+        const {long,lat} = countryInfo.countryInfo;
+        currentMap.flyTo([lat,long],8);
+        setCurrentCountry(countryInfo);
+      } else {
+      showMessage('No such country');
+    }
   }
 
   const getCountryInfo = (country,data) => {
     if(data&&country){
       return data.countryData.find(element=>{
-        return element.country === country;
+        return element.country.toLowerCase() === country.toLowerCase();
       })
     }
   }

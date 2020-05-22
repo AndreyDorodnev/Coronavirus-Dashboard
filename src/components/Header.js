@@ -8,7 +8,7 @@ const Header = (props) => {
 
   const DARK_THEME_FLAG = 'coronaMapDarkTheme';
   const [darkTheme,setDarkTheme] = useState(false);
-
+  const [inputValue,setInputValue] = useState('');
 
   useEffect(()=>{
     console.log('HEADER EFFECT');
@@ -48,6 +48,24 @@ const Header = (props) => {
     isDark? document.documentElement.setAttribute('data-theme','dark') : document.documentElement.removeAttribute('data-theme');
   }
 
+  const dataSubmit = event => {
+    event.preventDefault();
+    props.searchEnter(inputValue);
+  }
+
+  const inputValueChange = event => {
+    const dataStr = inputDataValidate(event.target.value);
+    setInputValue(dataStr);
+  }
+
+  const inputDataValidate = (dataStr) => {
+    if(dataStr.length>inputValue.length){
+      return dataStr.replace(/[0-9]/g, "");
+    } else {
+      return dataStr;
+    }
+  }
+
   return (
     <header>
       <Container type="content">
@@ -56,8 +74,8 @@ const Header = (props) => {
           <div className="icon" title="Refresh data" onClick={props.refreshData}><RefreshIcon></RefreshIcon></div>
           <p>{props.updated? props.updated:null}</p>
         </div>
-        <form>
-          <input type="text" placeholder="enter country"></input>
+        <form onSubmit={dataSubmit}>
+          <input type="text" placeholder="enter country" value={inputValue} onChange={inputValueChange}></input>
         </form>
         <ToggleButton active={darkTheme} text="Dark Theme" buttonClick={changeTheme}></ToggleButton>
         {/* <ul>
