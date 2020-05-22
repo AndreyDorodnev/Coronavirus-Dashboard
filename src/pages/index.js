@@ -24,7 +24,7 @@ const IndexPage = () => {
 
   const [totalData,setTotalData] = useState(null);
   const [currentCountry,setCurrentCountry] = useState(null);
-  const [message,setMessage] = useState('');
+  const [message,setMessage] = useState({text:'',time:''});
 
 
   useEffect(()=>{
@@ -34,11 +34,11 @@ const IndexPage = () => {
 
   const updateData = () => {
     axios.get('https://corona.lmao.ninja/v2/all')
-    .then(totalData=>{
+    .then(summaryData=>{
       axios.get('https://corona.lmao.ninja/v2/countries')
       .then(countryData=>{
-        setTotalData({total:totalData.data,countryData:countryData.data});
-        setMessage("Data has been refresh");
+        setTotalData({total:summaryData.data,countryData:countryData.data});
+        setMessage({text:`Data has been refresh`,time: Date.now()});
         // console.log(getTotalCasesData({total:totalData.data,countryData:countryData.data}));
       });
     });
@@ -115,7 +115,7 @@ const IndexPage = () => {
   const markerClick = (evt) => {
     //todo set country info by name
     console.log('MARKER',evt);
-    setMessage("Marker click");
+    // setMessage("Marker click");
   }
 
   const getShortNum = num => {

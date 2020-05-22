@@ -6,7 +6,7 @@ export default props => {
     const [visible,setVisible] = useState(false);
 
     useEffect(()=>{
-        if(props.message&&props.message.length>0){
+        if(props.message.text&&props.message.text.length>0){
             setVisible(true);
             setTimeout(()=>{
                 setVisible(false);
@@ -16,7 +16,7 @@ export default props => {
 
     return (
         <div className={['popup-message',visible? "popup-active":null].join(' ')}>
-            <p>{props.message}</p>
+            <p>{props.message.text}</p>
         </div>
     )
 }
