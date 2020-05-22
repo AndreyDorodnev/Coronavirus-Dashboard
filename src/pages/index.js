@@ -8,6 +8,7 @@ import Container from 'components/Container';
 import Map from 'components/Map';
 import TotalInfo from '../components/main/TotalInfo';
 import CountryInfo from '../components/main/CountryInfo';
+import PopupMessage from '../components/ui/PopupMessage';
 
 const LOCATION = {
   lat: 0,
@@ -23,6 +24,8 @@ const IndexPage = () => {
 
   const [totalData,setTotalData] = useState(null);
   const [currentCountry,setCurrentCountry] = useState(null);
+  const [message,setMessage] = useState('');
+
 
   useEffect(()=>{
     console.log('USe effect');  
@@ -35,6 +38,7 @@ const IndexPage = () => {
       axios.get('https://corona.lmao.ninja/v2/countries')
       .then(countryData=>{
         setTotalData({total:totalData.data,countryData:countryData.data});
+        setMessage("Data has been refresh");
         // console.log(getTotalCasesData({total:totalData.data,countryData:countryData.data}));
       });
     });
@@ -109,8 +113,9 @@ const IndexPage = () => {
   }
 
   const markerClick = (evt) => {
+    //todo set country info by name
     console.log('MARKER',evt);
-    
+    setMessage("Marker click");
   }
 
   const getShortNum = num => {
@@ -242,6 +247,8 @@ const IndexPage = () => {
       <Container type="content" className="country-info">
         <CountryInfo data={currentCountry}></CountryInfo>
       </Container>
+
+      <PopupMessage message={message}></PopupMessage>
     </Layout>
   );
 };

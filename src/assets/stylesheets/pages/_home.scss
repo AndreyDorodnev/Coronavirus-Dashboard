@@ -5,6 +5,7 @@
   }
 
   main {
+    position: relative;
     padding: 0;
     display: grid;
     grid-template-areas:    "total-info map total-deaths"

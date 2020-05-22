@@ -1,0 +1,25 @@
+.popup-message{
+    position: absolute;
+    z-index: 2;
+    bottom: -40px;
+    height: 40px;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    max-width: 300px;
+    background-color: red;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    opacity: 0;
+    transition: 0.3s;
+    p{
+        margin: 0;
+        color: black;
+    }
+}
+
+.popup-active{
+    opacity: 1;
+}

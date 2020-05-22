@@ -16,7 +16,6 @@ const Layout = ({ children, pageName,refreshData,updated }) => {
 
   return (
     <>
-    {console.log('PAGE NAME',pageName)}
       <Helmet bodyAttributes={{ class: className }}>
         <title>Gatsby Site</title>
       </Helmet>
