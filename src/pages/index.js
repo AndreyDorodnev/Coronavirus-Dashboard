@@ -209,6 +209,11 @@ const IndexPage = () => {
     } else return null;
   }
 
+  const getLastUpdate = () => {
+    return totalData? getdateFromMilliseconds(totalData.total.updated): null;
+
+  }
+
   const mapSettings = {
     center: CENTER,
     defaultBaseMap: 'OpenStreetMap',
@@ -217,7 +222,7 @@ const IndexPage = () => {
   };
 
   return (
-    <Layout pageName="home">
+    <Layout pageName="home" refreshData={updateData} updated={getLastUpdate()}>
       <Helmet>
         <title>Coronavirus map</title>
       </Helmet>

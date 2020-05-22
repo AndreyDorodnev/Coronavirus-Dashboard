@@ -1,10 +1,10 @@
 import React, {useState,useEffect} from 'react';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
 import ToggleButton from './ui/ToggleButton';
 import Container from 'components/Container';
 import {ReactComponent as RefreshIcon} from '../assets/icons/refresh.svg';
 
-const Header = () => {
+const Header = (props) => {
 
   const DARK_THEME_FLAG = 'coronaMapDarkTheme';
   const [darkTheme,setDarkTheme] = useState(false);
@@ -45,11 +45,6 @@ const Header = () => {
   }
 
   const applyTheme = isDark => {
-    // if(isDark){
-    //   document.documentElement.setAttribute('data-theme','dark')
-    // } else {
-    //   document.documentElement.removeAttribute('data-theme')
-    // }
     isDark? document.documentElement.setAttribute('data-theme','dark') : document.documentElement.removeAttribute('data-theme');
   }
 
@@ -58,7 +53,8 @@ const Header = () => {
       <Container type="content">
         <div className="caption">
           <p>Coronavirus dashboard</p>
-          <div className="icon" title="Refresh data"><RefreshIcon></RefreshIcon></div>
+          <div className="icon" title="Refresh data" onClick={props.refreshData}><RefreshIcon></RefreshIcon></div>
+          <p>{props.updated? props.updated:null}</p>
         </div>
         <form>
           <input type="text" placeholder="enter country"></input>

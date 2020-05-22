@@ -7,7 +7,7 @@ import 'assets/stylesheets/application.scss';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
-const Layout = ({ children, pageName }) => {
+const Layout = ({ children, pageName,refreshData,updated }) => {
   let className = '';
 
   if ( pageName ) {
@@ -16,11 +16,12 @@ const Layout = ({ children, pageName }) => {
 
   return (
     <>
+    {console.log('PAGE NAME',pageName)}
       <Helmet bodyAttributes={{ class: className }}>
         <title>Gatsby Site</title>
       </Helmet>
       <div className="wrapper">
-        <Header />
+        <Header refreshData={refreshData} updated={updated}/>
         <main>{ children }</main>
         <Footer />
       </div>

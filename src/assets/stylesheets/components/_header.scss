@@ -18,9 +18,12 @@ header {
     align-items: center;
     p{
       margin: 0;
-      margin-right: 20px;
+      // margin-right: 20px;
     }
     .icon{
+      display: block;
+      width: 20px;
+      margin: 0 20px;
       position: relative;
       svg{
         position: absolute;
