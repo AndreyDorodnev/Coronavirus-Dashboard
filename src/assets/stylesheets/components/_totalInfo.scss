@@ -38,11 +38,20 @@
           height: min-content;
           width: 100%;
           border: 0;
-          border-bottom: 1px solid lightgrey;
-          border-top: 1px solid lightgrey;
+          border-bottom: 1px solid var(--secondary-surface);
+          border-top: 1px solid var(--secondary-surface);
           color: var(--primary-font-color);
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
           &:hover{
             background-color: var(--primary-surface-selected);
+          }
+          div{
+            margin: 0 7px;
+            &:last-child{
+              color: $red-800;
+            }
           }
         }
       }

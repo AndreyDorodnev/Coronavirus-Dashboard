@@ -35,6 +35,23 @@
 
 }
 
+.icon-current-marker{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 4.6em;
+  height: 4.6em;
+  font-size: .7em;
+  font-weight: bold;
+  background-color: rgba($color: $blue-800, $alpha: 0.8);
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(black, .9);
+  margin-left: -5px;
+  margin-top: -5px;
+}
+
 .icon-marker {
   display: flex;
   position: relative;

@@ -17,7 +17,7 @@ const LOCATION = {
 const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 3;
 
-let markers = null;
+let markers = null, currentMarker=null;
 let currentMap = null;
 
 const IndexPage = () => {
@@ -116,8 +116,10 @@ const IndexPage = () => {
 
   const markerClick = (evt) => {
     const countryInfo = getCountryInfoByLatLng(evt.latlng,totalData);
+    const {lng,lat} = evt.latlng;
+    addMarker(lat,lng);
     if(countryInfo){
-      setCurrentCountry(countryInfo);
+      setCurrentCountry(countryInfo); //show seleced country info
     }
   }
 
@@ -155,12 +157,28 @@ const IndexPage = () => {
   const setCountry = country => {
       const countryInfo = getCountryInfoByName(country,totalData);
       if(countryInfo){
-        const {long,lat} = countryInfo.countryInfo;
-        currentMap.flyTo([lat,long],8);
-        setCurrentCountry(countryInfo);
+        const {long,lat} = countryInfo.countryInfo; //get coordinates
+        currentMap.flyTo([lat,long],4); //fly to selected country
+        addMarker(lat,long); //make new marker at selected country
+        setCurrentCountry(countryInfo); //show country information
       } else {
       showMessage('No such country');
     }
+  }
+
+  const addMarker = (lat,lng)=>{
+    //clear selected country marker if exists
+    clearLayers(currentMarker,currentMap);
+    //create new marker
+    currentMarker = 
+    L.marker({lat,lng},{
+      icon: L.divIcon({
+        className: 'icon',
+        html: `<span class="icon-current-marker"></span>`
+      })
+    });
+    //add to map
+    currentMarker.addTo(currentMap);
   }
 
   const getCountryInfoByName = (country,data) => {
