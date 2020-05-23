@@ -9,15 +9,16 @@
 
 html{
   height: 100vh;
-  --primary-background: #fff;
-  --primary-surface: #0288D1;
-  --primary-font-color: #fff;
-  --primary-surface-selected: #0277BD ;
+  --primary-background: #8badb8;
+  --primary-surface: rgb(255, 255, 255);
+  --primary-font-color: #000;
+  --primary-surface-selected: rgb(68, 171, 231) ;
 }
 
 html[data-theme="dark"]{
-  --primary-background: #000;
-  --primary-surface: rgb(34, 36, 37);
+  --primary-background: rgb(54, 53, 53);
+  --primary-surface: rgb(69, 71, 71);
+  --primary-font-color: #fff;
 }
 
 body {
