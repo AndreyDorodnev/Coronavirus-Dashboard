@@ -13,12 +13,14 @@ html{
   --primary-surface: rgb(255, 255, 255);
   --primary-font-color: #000;
   --primary-surface-selected: rgb(68, 171, 231) ;
+  --secondary-surface: rgb(202, 202, 202);
 }
 
 html[data-theme="dark"]{
   --primary-background: rgb(54, 53, 53);
   --primary-surface: rgb(69, 71, 71);
   --primary-font-color: #fff;
+  --secondary-surface: rgb(114, 114, 114);
 }
 
 body {
