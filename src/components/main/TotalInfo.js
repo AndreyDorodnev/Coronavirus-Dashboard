@@ -33,7 +33,7 @@ export default props => {
                                 {
                                     props.data.data.map(element=>{
                                         return (
-                                            <li key={element.text} onClick={evt=>props.itemClick(element.text)}>
+                                            <li key={element.text} onClick={evt=>props.itemClick? props.itemClick(element.text):null}>
                                                 <div>{element.text}</div>
                                                 <div>{element.value}</div>
                                             </li>
