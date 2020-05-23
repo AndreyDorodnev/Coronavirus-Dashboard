@@ -1,4 +1,5 @@
 import React from 'react';
+import {Scrollbars} from 'react-custom-scrollbars';
 
 export default props => {
 
@@ -27,6 +28,7 @@ export default props => {
                             <p>{props.data.caption.text}</p>
                         </div>
                         <div className="list">
+                        <Scrollbars>
                             <ul>
                                 {
                                     props.data.data.map(element=>{
@@ -39,6 +41,7 @@ export default props => {
                                     })
                                 }
                             </ul>
+                        </Scrollbars>
                         </div>
 
                     </React.Fragment>

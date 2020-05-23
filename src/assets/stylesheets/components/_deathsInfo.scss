@@ -9,6 +9,7 @@
         flex-direction: column;
         .caption{
           margin-top: 16px;
+          margin-bottom: 16px;
           background-color: var(--primary-surface);
           text-align: center;
           text-transform: uppercase;
@@ -25,18 +26,12 @@
         .list{
           position: relative;
           height: 100%;
+          margin-bottom: 16px;
           ul{
-            position: absolute; 
-            left:0;
-            right:0;
-            top:0;
-            bottom:0;
-            max-height: 100%;
-            overflow: hidden;
-            overflow-y: scroll;
-            background-color: var(--primary-surface);
+            background-color: var(--primary-surface);;
             list-style: none;
             padding: 0;
+            margin:0;
             li{
               cursor: pointer;
               padding: 4px 4px;
