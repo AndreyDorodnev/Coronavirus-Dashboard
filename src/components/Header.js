@@ -8,6 +8,7 @@ const Header = (props) => {
   const DARK_THEME_FLAG = 'coronaMapDarkTheme';
   const [darkTheme,setDarkTheme] = useState(false);
   const [inputValue,setInputValue] = useState('');
+  const [promptList,setPromptList] = useState(null);
 
   useEffect(()=>{
     setTheme(readDarkThemeFlag());
@@ -53,8 +54,16 @@ const Header = (props) => {
 
   const inputValueChange = event => {
     const dataStr = inputDataValidate(event.target.value);
+    setPromptList(setPrompt(dataStr));
     setInputValue(dataStr);
   }
+
+  const setPrompt = (dataStr) => {
+    return props.countryList? props.countryList.filter(element=>{
+      return element.toLowerCase().includes(dataStr);
+    }):null;
+  }
+  const cleatPrompt = () => {setPromptList(null)};
 
   const inputDataValidate = (dataStr) => {
     if(dataStr.length>inputValue.length){
@@ -66,8 +75,6 @@ const Header = (props) => {
 
   return (
     <header>
-      {console.log('COUNTRY',props.countryList)
-      }
       <Container type="content">
         <div className="caption">
           <p>Coronavirus dashboard</p>
@@ -75,7 +82,20 @@ const Header = (props) => {
           <p>{props.updated? props.updated:null}</p>
         </div>
         <form onSubmit={dataSubmit}>
-          <input type="text" placeholder="enter country" value={inputValue} onChange={inputValueChange}></input>
+          <input type="text" placeholder="enter country" value={inputValue} onChange={inputValueChange} onBlur={cleatPrompt}></input>
+          {
+            promptList? 
+            (
+              <ul className="prompt">
+                {promptList.map(element=>{
+                  return (
+                    <li key={element}>{element}</li>
+                  )
+                })}
+              </ul>
+            ):
+            null
+          }
         </form>
         <ToggleButton active={darkTheme} text="Dark Theme" buttonClick={changeTheme}></ToggleButton>
       </Container>

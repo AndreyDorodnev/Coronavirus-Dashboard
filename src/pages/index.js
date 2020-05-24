@@ -45,6 +45,8 @@ const IndexPage = () => {
    * @description Fires a callback once the page renders
    */
   async function mapEffect({ leafletElement: map } = {}) {
+    console.log('MAP EFFECT');
+    
     //save current map
     currentMap = map;
     clearLayers(markers,map);
