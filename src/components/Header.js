@@ -10,7 +10,6 @@ const Header = (props) => {
   const [inputValue,setInputValue] = useState('');
 
   useEffect(()=>{
-    console.log('HEADER EFFECT');
     setTheme(readDarkThemeFlag());
   },[]);
 
