@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react';
-// import { Link } from 'gatsby';
 import ToggleButton from './ui/ToggleButton';
 import Container from 'components/Container';
 import {ReactComponent as RefreshIcon} from '../assets/icons/refresh.svg';
@@ -78,14 +77,6 @@ const Header = (props) => {
           <input type="text" placeholder="enter country" value={inputValue} onChange={inputValueChange}></input>
         </form>
         <ToggleButton active={darkTheme} text="Dark Theme" buttonClick={changeTheme}></ToggleButton>
-        {/* <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2/">Page 2</Link>
-          </li>
-        </ul> */}
       </Container>
     </header>
   );

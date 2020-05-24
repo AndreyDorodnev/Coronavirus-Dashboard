@@ -27,7 +27,6 @@ const IndexPage = () => {
   const [message,setMessage] = useState({text:'',time:''});
 
   useEffect(()=>{
-    console.log('USe effect');  
     updateData();
   },[]);
 
@@ -48,7 +47,6 @@ const IndexPage = () => {
   async function mapEffect({ leafletElement: map } = {}) {
     //save current map
     currentMap = map;
-    console.log('Map effect');  
     clearLayers(markers,map);
     if(!totalData)
       return;
@@ -191,7 +189,7 @@ const IndexPage = () => {
   const getCountryInfoByLatLng = (latLng,data) => {
     if(data&&latLng){
       return data.countryData.find(element=>{
-        return (element.countryInfo.lat === latLng.lat) && (element.countryInfo.long == latLng.lng) 
+        return (element.countryInfo.lat === latLng.lat) && (element.countryInfo.long === latLng.lng) 
       })
     }
   }
