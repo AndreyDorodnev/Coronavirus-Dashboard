@@ -248,6 +248,12 @@ const IndexPage = () => {
     return totalData? getdateFromMilliseconds(totalData.total.updated): null;
   }
 
+  const getCountryList = (data) => {
+    return data? data.countryData.map(element=>{
+      return element.country;
+    }) : null;    
+  } 
+
   const mapSettings = {
     center: CENTER,
     defaultBaseMap: 'OpenStreetMap',
@@ -256,7 +262,13 @@ const IndexPage = () => {
   };
 
   return (
-    <Layout pageName="home" refreshData={updateData} updated={getLastUpdate()} searchCountry={setCountry}>
+    <Layout 
+      pageName="home" 
+      refreshData={updateData} 
+      updated={getLastUpdate()} 
+      searchCountry={setCountry} 
+      countryList={getCountryList(totalData)}
+    >
       <Helmet>
         <title>Coronavirus map</title>
       </Helmet>

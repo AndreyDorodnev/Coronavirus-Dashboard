@@ -66,6 +66,8 @@ const Header = (props) => {
 
   return (
     <header>
+      {console.log('COUNTRY',props.countryList)
+      }
       <Container type="content">
         <div className="caption">
           <p>Coronavirus dashboard</p>
