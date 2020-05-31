@@ -16,7 +16,7 @@ export default props => {
 
     return (
         <div className={['popup-message',visible? "popup-active":null].join(' ')}>
-            <p>{props.message.text}</p>
+            <p>{props.message? props.message.text : ''}</p>
         </div>
     )
 }
