@@ -37,7 +37,12 @@ const IndexPage = () => {
       .then(countryData=>{
         setTotalData({total:summaryData.data,countryData:countryData.data});
         showMessage('Data has been refresh');
+      })
+      .catch(err=>{
+          console.log('Country data read error',err);
       });
+    }).catch(err=>{
+      console.log('Summary data read error',err);
     });
   }
   /**
@@ -282,10 +287,10 @@ const IndexPage = () => {
         <TotalInfo data={getTotalCasesData(totalData)} itemClick={setCountry}></TotalInfo>
       </Container>
       <Container type="content" className="total-deaths">
-        <TotalInfo data={getTotalDeathsData(totalData)}></TotalInfo>
+        <TotalInfo data={getTotalDeathsData(totalData)} itemClick={setCountry}></TotalInfo>
       </Container>
       <Container type="content" className="total-recovered">
-        <TotalInfo data={getTotalRecoveredData(totalData)}></TotalInfo>
+        <TotalInfo data={getTotalRecoveredData(totalData)} itemClick={setCountry}></TotalInfo>
       </Container>
       <Container type="content" className="country-info">
         <CountryInfo data={currentCountry}></CountryInfo>
