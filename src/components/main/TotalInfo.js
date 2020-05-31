@@ -1,5 +1,6 @@
 import React from 'react';
 import {Scrollbars} from 'react-custom-scrollbars';
+import Loading from '../ui/loading';
 
 export default props => {
 
@@ -47,7 +48,7 @@ export default props => {
                     </React.Fragment>
                 ):
                 (
-                    null
+                    <Loading></Loading>
                 )
             }
         </React.Fragment>
