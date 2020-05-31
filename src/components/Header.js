@@ -2,13 +2,12 @@ import React, {useState,useEffect} from 'react';
 import ToggleButton from './ui/ToggleButton';
 import Container from 'components/Container';
 import {ReactComponent as RefreshIcon} from '../assets/icons/refresh.svg';
+import Search from './ui/Search';
 
 const Header = (props) => {
 
   const DARK_THEME_FLAG = 'coronaMapDarkTheme';
   const [darkTheme,setDarkTheme] = useState(false);
-  const [inputValue,setInputValue] = useState('');
-  const [promptList,setPromptList] = useState(null);
 
   useEffect(()=>{
     setTheme(readDarkThemeFlag());
@@ -47,30 +46,8 @@ const Header = (props) => {
     isDark? document.documentElement.setAttribute('data-theme','dark') : document.documentElement.removeAttribute('data-theme');
   }
 
-  const dataSubmit = event => {
-    event.preventDefault();
-    props.searchEnter(inputValue);
-  }
-
-  const inputValueChange = event => {
-    const dataStr = inputDataValidate(event.target.value);
-    setPromptList(setPrompt(dataStr));
-    setInputValue(dataStr);
-  }
-
-  const setPrompt = (dataStr) => {
-    return props.countryList? props.countryList.filter(element=>{
-      return element.toLowerCase().includes(dataStr);
-    }):null;
-  }
-  const cleatPrompt = () => {setPromptList(null)};
-
-  const inputDataValidate = (dataStr) => {
-    if(dataStr.length>inputValue.length){
-      return dataStr.replace(/[0-9]/g, "");
-    } else {
-      return dataStr;
-    }
+  const dataSubmit = (value) => {
+    props.searchEnter(value);
   }
 
   return (
@@ -81,22 +58,7 @@ const Header = (props) => {
           <div className="icon" title="Refresh data" onClick={props.refreshData}><RefreshIcon></RefreshIcon></div>
           <p>{props.updated? props.updated:null}</p>
         </div>
-        <form onSubmit={dataSubmit}>
-          <input type="text" placeholder="enter country" value={inputValue} onChange={inputValueChange} onBlur={cleatPrompt}></input>
-          {
-            promptList? 
-            (
-              <ul className="prompt">
-                {promptList.map(element=>{
-                  return (
-                    <li key={element}>{element}</li>
-                  )
-                })}
-              </ul>
-            ):
-            null
-          }
-        </form>
+        <Search propmptsData={props.countryList} dataSubmit={dataSubmit}></Search>
         <ToggleButton active={darkTheme} text="Dark Theme" buttonClick={changeTheme}></ToggleButton>
       </Container>
     </header>
